@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+
+{% block title %}Vendor Registration{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        <div class="card shadow-sm">
+            <div class="card-header bg-info text-white">
+                <h4 class="mb-0">Vendor Registration</h4>
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    {% csrf_token %}
+                    
+                    {% if form.errors %}
+                        <div class="alert alert-danger">
+                            Please correct the errors below.
+                        </div>
+                    {% endif %}
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="username" class="form-label">Username*</label>
+                            <input type="text" class="form-control" id="username" name="username" required
+                                   value="{{ form.username.value|default:'' }}">
+                            {% if form.username.errors %}
+                                <div class="invalid-feedback d-block">
+                                    {{ form.username.errors.as_text }}
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="email" class="form-label">Email*</label>
+                            <input type="email" class="form-control" id="email" name="email" required
+                                   value="{{ form.email.value|default:'' }}">
+                            {% if form.email.errors %}
+                                <div class="invalid-feedback d-block">
+                                    {{ form.email.errors.as_text }}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="password1" class="form-label">Password*</label>
+                            <input type="password" class="form-control" id="password1" name="password1" required>
+                            {% if form.password1.errors %}
+                                <div class="invalid-feedback d-block">
+                                    {{ form.password1.errors.as_text }}
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="password2" class="form-label">Confirm Password*</label>
+                            <input type="password" class="form-control" id="password2" name="password2" required>
+                            {% if form.password2.errors %}
+                                <div class="invalid-feedback d-block">
+                                    {{ form.password2.errors.as_text }}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">Phone Number*</label>
+                        <input type="tel" class="form-control" id="phone" name="phone" required
+                               value="{{ form.phone.value|default:'' }}">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="address" class="form-label">Business Address*</label>
+                        <textarea class="form-control" id="address" name="address" rows="3" required>{{ form.address.value|default:'' }}</textarea>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="terms" required>
+                            <label class="form-check-label" for="terms">
+                                I agree to the <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">Terms and Conditions</a>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-info text-white">Register as Vendor</button>
+                        <a href="{% url 'user_login' %}" class="btn btn-outline-secondary">Already have an account? Login</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Terms Modal -->
+<div class="modal fade" id="termsModal" tabindex="-1" aria-labelledby="termsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="termsModalLabel">Terms and Conditions</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h6>Vendor Agreement</h6>
+                <p>By registering as a vendor, you agree to:</p>
+                <ul>
+                    <li>Provide accurate product information</li>
+                    <li>Maintain fair pricing</li>
+                    <li>Fulfill orders in a timely manner</li>
+                    <li>Respond to customer inquiries promptly</li>
+                </ul>
+                <h6>Content Guidelines</h6>
+                <p>You are responsible for all content you upload to the platform.</p>
+                <h6>Privacy Policy</h6>
+                <p>We respect your privacy and handle your data according to our privacy policy.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

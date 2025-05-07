@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h2 class="my-4">Vendor Management</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for vendor in vendors %}
+            <tr>
+                <td>{{ vendor.username }}</td>
+                <td>{{ vendor.email }}</td>
+                <td>{% if vendor.is_active %}Active{% else %}Inactive{% endif %}</td>
+                <td>
+                    {% if vendor.is_active %}
+                    <a href="#" class="btn btn-danger btn-sm">Deactivate</a>
+                    {% else %}
+                    <a href="#" class="btn btn-success btn-sm">Activate</a>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

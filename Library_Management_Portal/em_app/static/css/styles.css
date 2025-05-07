@@ -1,0 +1,28 @@
+body {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.card {
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: scale(1.02);
+}
+
+.list-group-item {
+    margin-bottom: 10px;
+}
+
+.alert {
+    margin-top: 20px;
+}
+
+.table {
+    margin-top: 20px;
+}
+
+footer {
+    margin-top: 50px;
+}

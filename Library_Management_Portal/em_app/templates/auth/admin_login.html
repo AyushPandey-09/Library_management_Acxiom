@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Login{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6 col-lg-4">
+        <div class="card shadow-sm">
+            <div class="card-header bg-dark text-white">
+                <h4 class="mb-0">Admin Login</h4>
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    {% csrf_token %}
+                    {% if form.errors %}
+                        <div class="alert alert-danger">
+                            Invalid username or password. Please try again.
+                        </div>
+                    {% endif %}
+                    
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="username" name="username" required 
+                               placeholder="Enter admin username">
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" required 
+                               placeholder="Enter admin password">
+                    </div>
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-dark">Login</button>
+                    </div>
+                </form>
+                
+                <div class="mt-3 text-center">
+                    <p>For regular users, please <a href="{% url 'user_login' %}">login here</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

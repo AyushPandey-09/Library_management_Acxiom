@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <h2 class="my-4">Admin Portal</h2>
+    
+    <h4>Pending Product Approvals</h4>
+    {% if pending_products %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Vendor</th>
+                <th>Price</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in pending_products %}
+            <tr>
+                <td>{{ product.name }}</td>
+                <td>{{ product.vendor.username }}</td>
+                <td>${{ product.price }}</td>
+                <td>
+                    <a href="{% url 'approve_product' product.id %}" class="btn btn-success btn-sm">Approve</a>
+                    <a href="{% url 'reject_product' product.id %}" class="btn btn-danger btn-sm">Reject</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No products pending approval.</p>
+    {% endif %}
+    
+    <div class="mt-4">
+        <a href="{% url 'maintain_users' %}" class="btn btn-primary">Manage Users</a>
+        <a href="{% url 'maintain_vendors' %}" class="btn btn-primary">Manage Vendors</a>
+    </div>
+</div>
+{% endblock %}
